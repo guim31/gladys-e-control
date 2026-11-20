@@ -1,0 +1,182 @@
+[
+  {
+    "id": 1354677,
+    "name": "AVANTI - Landeck Innstrasse 38",
+    "location": {
+      "address": "Innstrasse 38",
+      "postalCode": "6500",
+      "city": "Landeck",
+      "latitude": 47.14163,
+      "longitude": 10.56352
+    },
+    "position": 1,
+    "open": true,
+    "distance": 22.727311001630667,
+    "prices": [
+      {
+        "fuelType": "SUP",
+        "amount": 1.604,
+        "label": "Super 95"
+      }
+    ]
+  },
+  {
+    "id": 4157,
+    "name": "DISK",
+    "location": {
+      "address": "Lochau 378",
+      "postalCode": "6555",
+      "city": "Kappl",
+      "latitude": 47.06305,
+      "longitude": 10.38079
+    },
+    "position": 2,
+    "open": true,
+    "distance": 11.477119979241856,
+    "prices": [
+      {
+        "fuelType": "SUP",
+        "amount": 1.605,
+        "label": "Super 95"
+      }
+    ]
+  },
+  {
+    "id": 1354717,
+    "name": "JET TANKSTELLE",
+    "location": {
+      "address": "BAHNHOFSTR. 26",
+      "postalCode": "6500",
+      "city": "LANDECK",
+      "latitude": 47.150185,
+      "longitude": 10.581303
+    },
+    "position": 3,
+    "open": true,
+    "distance": 24.14512639193236,
+    "prices": [
+      {
+        "fuelType": "SUP",
+        "amount": 1.607,
+        "label": "Super 95"
+      }
+    ]
+  },
+  {
+    "id": 4172,
+    "name": "DISK",
+    "location": {
+      "address": "Klostertalerstraße 100",
+      "postalCode": "6752",
+      "city": "Dalaas",
+      "latitude": 47.12337,
+      "longitude": 10.00529
+    },
+    "position": 4,
+    "open": true,
+    "distance": 19.603629961416672,
+    "prices": [
+      {
+        "fuelType": "SUP",
+        "amount": 1.61,
+        "label": "Super 95"
+      }
+    ]
+  },
+  {
+    "id": 1474084,
+    "name": "eni24",
+    "location": {
+      "address": "Stockach 29a",
+      "postalCode": "6653",
+      "city": "Bach Im Lechtal",
+      "latitude": 47.260476,
+      "longitude": 10.370189
+    },
+    "position": 5,
+    "open": true,
+    "distance": 16.72214597143911,
+    "prices": [
+      {
+        "fuelType": "SUP",
+        "amount": 1.629,
+        "label": "Super 95"
+      }
+    ]
+  },
+  {
+    "id": 44086,
+    "name": "ENI Gutmann",
+    "location": {
+      "address": "Gewerbegebiet 16",
+      "postalCode": "6580",
+      "city": "St. Anton am Arlberg",
+      "latitude": 47.140115,
+      "longitude": 10.290108
+    },
+    "position": 6,
+    "open": true,
+    "distance": 2.3501245775611452,
+    "prices": []
+  },
+  {
+    "id": 100404,
+    "name": "OMV - Pettneu am Arlberg Schnann-Gewerbezone 150",
+    "location": {
+      "address": "Schnann-Gewerbezone 150",
+      "postalCode": "6574",
+      "city": "Pettneu am Arlberg",
+      "latitude": 47.1489,
+      "longitude": 10.3743
+    },
+    "position": 7,
+    "open": true,
+    "distance": 8.649406913945914,
+    "prices": []
+  },
+  {
+    "id": 1354884,
+    "name": "OMV - Klösterle Danöfen 126",
+    "location": {
+      "address": "Danoefen 126",
+      "postalCode": "6754",
+      "city": "Kloesterle",
+      "latitude": 47.12939,
+      "longitude": 10.06077
+    },
+    "position": 8,
+    "open": true,
+    "distance": 15.391927114156683,
+    "prices": []
+  },
+  {
+    "id": 1354867,
+    "name": "OMV - Innerbraz Äuleweg 1",
+    "location": {
+      "address": "Äuleweg 1",
+      "postalCode": "6751",
+      "city": "Innerbraz",
+      "latitude": 47.14077,
+      "longitude": 9.92512
+    },
+    "position": 9,
+    "open": true,
+    "distance": 25.69765641435918,
+    "prices": []
+  },
+  {
+    "id": 34757,
+    "name": "AVIA Xpress",
+    "location": {
+      "address": "Walserstr. 24",
+      "postalCode": "6991",
+      "city": "Riezlern",
+      "latitude": 47.3602125,
+      "longitude": 10.1902691
+    },
+    "position": 10,
+    "open": true,
+    "distance": 26.362895518879718,
+    "prices": []
+  }
+]

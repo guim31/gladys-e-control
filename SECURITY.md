@@ -30,6 +30,13 @@ Gladys before reporting a problem.
 
 In scope: the code of this repository and the Docker image it publishes.
 
+The integration stores under `/data` only the last cheapest price seen per fuel, and the position
+it was searched around (for the price drop trigger): no secret, no account. It reads the
+coordinates of the Gladys house (`location: true`) and sends them, or the position of the
+configured postal code, to `api.e-control.at` to search the stations around; they are never
+written to the logs at the info level. The container only makes outgoing HTTPS requests to
+`api.e-control.at`, without credentials, and listens on no port.
+
 Out of scope: Gladys Assistant itself (see its
 [security policy](https://github.com/GladysAssistant/Gladys/security/policy)),
 and the third-party services and devices the integration talks to.

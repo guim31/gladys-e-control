@@ -16,8 +16,8 @@ its only runtime dependency. It started from the official JavaScript template.
 ```bash
 npm install
 npm test                                  # node --test, the built-in runner
-node --test test/devices.test.js          # one file
-node --test --test-name-pattern "plug"    # tests whose name matches
+node --test test/app.test.js              # one file
+node --test --test-name-pattern "widget"  # tests whose name matches
 npm run lint                              # ESLint
 npm run format:check                      # Prettier, as the CI runs it
 npm run format                            # Prettier, fix in place
@@ -32,15 +32,17 @@ pushing.
 
 ```
 index.js                          SDK wiring only: handlers registered before connect()
-src/devices/index.js              registry of the device blueprints + dispatch helpers
-src/devices/<type>.js             one device type per file (buildDevice, onPoll, onSetValue...)
-src/scenes.js                     scene action handlers (manifest `scene_actions`)
-src/widgets.js                    dashboard widget handlers (manifest `widgets`)
+src/app.js                        the integration: search point, timer, reads, states, trigger, widget, action
+src/econtrol.js                   E-Control Spritpreisrechner client: search around a point, postal codes
+src/devices.js                    the "Cheapest fuel – Austria" device and its states
+src/fuels.js                      the three fuels (keys forever) and their API codes
+src/widgets.js                    dashboard widget `cheapest_stations`
+src/i18n.js                       every text in en/fr/de/es
 src/config.js                     DEFAULT_CONFIG (mirrors the manifest defaults) + normalization
-src/weather.js                    example driver (Open-Meteo)
+src/store.js, src/issues.js       /data persistence (last prices, for the trigger); failures logged once
 gladys-assistant-integration.json manifest: name, config_schema, actions, image...
-docs/en.md, docs/fr.md            user documentation, re-hosted by Gladys (mandatory)
-test/                             node --test, against the SDK's fake Gladys (integration-sdk/testing)
+docs/{en,fr,de,es}.md             user documentation, re-hosted by Gladys (mandatory)
+test/                             node --test, against the SDK's fake Gladys and a fake API (real answers)
 .github/scripts/release.mjs       release helpers (manifest bump, changelog), tested in test/
 ```
 
@@ -58,7 +60,7 @@ test/                             node --test, against the SDK's fake Gladys (in
   one, `0`/`0` for a feature without a range (text, image...). A missing one
   can pass the publication on a core that does not check it, then fail when
   the user clicks "Add" (HTTP 422 `t_device_feature.min cannot be null`). The
-  SDK's fake Gladys refuses it on publication, and `test/devices.test.js`
+  SDK's fake Gladys refuses it on publication, and `test/gladys-rules.test.js`
   checks them.
 - **The container rootfs is read-only.** Write only under `/data`, the one
   writable volume. Never log tokens, passwords or API keys.
@@ -78,8 +80,8 @@ test/                             node --test, against the SDK's fake Gladys (in
   `type: "provider"`: 5.1.0). `test/manifest.test.js` ties the manifest to the
   code (defaults, action, scene and widget handlers): change both sides
   together.
-- **User-facing text** is bilingual (English and French): action messages,
-  manifest texts, and `docs/en.md` / `docs/fr.md`, kept in sync.
+- **User-facing text** exists in English, French, German and Spanish: action
+  messages, manifest texts, and `docs/{en,fr,de,es}.md`, kept in sync.
 - **Style.** Prettier formats, ESLint catches mistakes. Comments explain why,
   in English. Tests never touch the network.
 
@@ -259,3 +261,20 @@ long, et sur un « Sie »/« Ihr… » de politesse en allemand. Le store exige 
 - Docs `en`, `fr`, `de`, `es` avec les mêmes sections.
 - Chauffe, ouverture, sécurité : ne rien rendre pilotable « comme un thermostat » ou par un assistant
   vocal quand une erreur serait dangereuse (leçon d'OctoPrint).
+
+## E-Control Spritpreisrechner (cette intégration)
+
+- API publique sans clé `https://api.e-control.at/sprit/1.0`. `search/gas-stations/by-address`
+  (`latitude`, `longitude`, `fuelType` = `DIE` | `SUP` | `GAS`, `includeClosed`) renvoie **au plus 10
+  stations, seules les 5 moins chères avec un prix** (`prices[0].amount`), `distance` en km depuis le
+  point ; un tableau vide hors d'Autriche ; 400 JSON (`SPE_G01`) sur un paramètre invalide.
+- `GET /gas-stations/{id}` répond **401** (compte requis) : impossible de suivre une station précise,
+  d'où l'absence d'appareil « station favorite ». `by-region` existe (`code`, `type` BL/PB) mais
+  n'apporte rien de plus que la recherche autour d'un point.
+- `regions/units` (≈ 140 Ko) donne la position de chaque code postal (`p`, `n`, `b` = latitude,
+  `l` = longitude) : lu une fois quand un code postal est configuré.
+- La zone de recherche est celle de l'API, non réglable : à la campagne, le GNV le moins cher est à
+  30–120 km (fixtures de St. Anton) ; `DISTANCE_MAX` vaut 200.
+- Aucune date de mise à jour par station dans la réponse : le widget affiche l'heure de lecture.
+- En Autriche, une hausse de prix n'est permise qu'à midi ; les baisses à tout moment. Lecture toutes
+  les 30 minutes (15 après un échec), une requête par carburant, l'une après l'autre.

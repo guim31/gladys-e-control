@@ -1,0 +1,170 @@
+[
+  {
+    "id": 1469766,
+    "name": "EVM - Biomethan Tankstelle",
+    "location": {
+      "address": "Energiestraße 9",
+      "postalCode": "2433",
+      "city": "Margarethen am Moos",
+      "latitude": 48.047635,
+      "longitude": 16.605493
+    },
+    "position": 1,
+    "open": true,
+    "distance": 24.92579885756983,
+    "prices": [
+      {
+        "fuelType": "GAS",
+        "amount": 1.5,
+        "label": "CNG"
+      }
+    ]
+  },
+  {
+    "id": 1354751,
+    "name": "OMV - Schwechat S1 KM 9",
+    "location": {
+      "address": "S1 ",
+      "postalCode": "2320",
+      "city": "Schwechat",
+      "latitude": 48.12249,
+      "longitude": 16.4387
+    },
+    "position": 2,
+    "open": true,
+    "distance": 10.774645061852418,
+    "prices": [
+      {
+        "fuelType": "GAS",
+        "amount": 1.649,
+        "label": "CNG"
+      }
+    ]
+  },
+  {
+    "id": 1354891,
+    "name": "OMV - Wien Adalbert Stifter-Straße 67",
+    "location": {
+      "address": "Adalbert Stifter-Strasse 67",
+      "postalCode": "1200",
+      "city": "Wien",
+      "latitude": 48.24309,
+      "longitude": 16.37535
+    },
+    "position": 3,
+    "open": true,
+    "distance": 3.8574043005950185,
+    "prices": [
+      {
+        "fuelType": "GAS",
+        "amount": 1.799,
+        "label": "CNG"
+      }
+    ]
+  },
+  {
+    "id": 1354922,
+    "name": "OMV - Wien 7. Haidequerstraße 2 KM 1,5",
+    "location": {
+      "address": "7. Haidequerstrasse 2 KM 1,5",
+      "postalCode": "1110",
+      "city": "Wien",
+      "latitude": 48.18187,
+      "longitude": 16.44451
+    },
+    "position": 4,
+    "open": true,
+    "distance": 6.136454908223024,
+    "prices": [
+      {
+        "fuelType": "GAS",
+        "amount": 1.799,
+        "label": "CNG"
+      }
+    ]
+  },
+  {
+    "id": 334,
+    "name": "OMV - Wien Sterngasse 13",
+    "location": {
+      "address": "Sterngasse 13",
+      "postalCode": "1230",
+      "city": "Wien",
+      "latitude": 48.14891,
+      "longitude": 16.33836
+    },
+    "position": 5,
+    "open": true,
+    "distance": 7.089481886324993,
+    "prices": [
+      {
+        "fuelType": "GAS",
+        "amount": 1.799,
+        "label": "CNG"
+      }
+    ]
+  },
+  {
+    "id": 1354753,
+    "name": "OMV - Wiener Neudorf IZ NÖ Süd Straße 4 Objekt 9",
+    "location": {
+      "address": "IZ NÖ Süd Strasse 4 Objekt 9",
+      "postalCode": "2351",
+      "city": "Wiener Neudorf",
+      "latitude": 48.0776,
+      "longitude": 16.3233
+    },
+    "position": 6,
+    "open": true,
+    "distance": 15.013346695558388,
+    "prices": [
+      {
+        "fuelType": "GAS",
+        "amount": 1.799,
+        "label": "CNG"
+      }
+    ]
+  },
+  {
+    "id": 1354778,
+    "name": "OMV - Wiener Neustadt Wiener Straße 126",
+    "location": {
+      "address": "Wiener Strasse 126",
+      "postalCode": "2700",
+      "city": "Wiener Neustadt",
+      "latitude": 47.84322,
+      "longitude": 16.24631
+    },
+    "position": 7,
+    "open": true,
+    "distance": 41.72034781558748,
+    "prices": [
+      {
+        "fuelType": "GAS",
+        "amount": 1.799,
+        "label": "CNG"
+      }
+    ]
+  },
+  {
+    "id": 1354782,
+    "name": "OMV - Loosdorf Gewerbestraße 8",
+    "location": {
+      "address": "Gewerbestrasse 8",
+      "postalCode": "3382",
+      "city": "Loosdorf",
+      "latitude": 48.19,
+      "longitude": 15.409
+    },
+    "position": 8,
+    "open": true,
+    "distance": 71.4910195284751,
+    "prices": [
+      {
+        "fuelType": "GAS",
+        "amount": 1.799,
+        "label": "CNG"
+      }
+    ]
+  }
+]

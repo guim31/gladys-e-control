@@ -1,0 +1,182 @@
+[
+  {
+    "id": 6083,
+    "name": "Turmöl Quick",
+    "location": {
+      "address": "Währinger Gürtel 116",
+      "postalCode": "1090",
+      "city": "Wien",
+      "latitude": 48.2266238,
+      "longitude": 16.3504673
+    },
+    "position": 1,
+    "open": true,
+    "distance": 2.5775215381934746,
+    "prices": [
+      {
+        "fuelType": "SUP",
+        "amount": 1.584,
+        "label": "Super 95"
+      }
+    ]
+  },
+  {
+    "id": 6070,
+    "name": "TANKEnergie Ringgarage",
+    "location": {
+      "address": "Untere Viaduktgasse 47-49",
+      "postalCode": "1030",
+      "city": "Wien",
+      "latitude": 48.2066605,
+      "longitude": 16.3873229
+    },
+    "position": 2,
+    "open": true,
+    "distance": 1.1477532485333168,
+    "prices": [
+      {
+        "fuelType": "SUP",
+        "amount": 1.589,
+        "label": "Super 95"
+      }
+    ]
+  },
+  {
+    "id": 35725,
+    "name": "BP",
+    "location": {
+      "address": "Laxenburgerstrasse 2a ",
+      "postalCode": "1100",
+      "city": "Wien",
+      "latitude": 48.183485,
+      "longitude": 16.373405
+    },
+    "position": 3,
+    "open": true,
+    "distance": 2.7858530230923244,
+    "prices": [
+      {
+        "fuelType": "SUP",
+        "amount": 1.599,
+        "label": "Super 95"
+      }
+    ]
+  },
+  {
+    "id": 35743,
+    "name": "BP",
+    "location": {
+      "address": "Hernalser Hauptstr.32-34 ",
+      "postalCode": "1170",
+      "city": "Wien",
+      "latitude": 48.2173667,
+      "longitude": 16.3382721
+    },
+    "position": 4,
+    "open": true,
+    "distance": 2.6964183035448204,
+    "prices": [
+      {
+        "fuelType": "SUP",
+        "amount": 1.609,
+        "label": "Super 95"
+      }
+    ]
+  },
+  {
+    "id": 27322,
+    "name": "BP",
+    "location": {
+      "address": "Erdbergstr 184",
+      "postalCode": "1030",
+      "city": "Wien",
+      "latitude": 48.1931587,
+      "longitude": 16.4103596
+    },
+    "position": 5,
+    "open": true,
+    "distance": 3.3127035633061563,
+    "prices": [
+      {
+        "fuelType": "SUP",
+        "amount": 1.609,
+        "label": "Super 95"
+      }
+    ]
+  },
+  {
+    "id": 1354901,
+    "name": "AVANTI - Wien Gaussplatz 1",
+    "location": {
+      "address": "Gaussplatz 1",
+      "postalCode": "1020",
+      "city": "Wien",
+      "latitude": 48.22588,
+      "longitude": 16.3708
+    },
+    "position": 6,
+    "open": true,
+    "distance": 1.9367958060549681,
+    "prices": []
+  },
+  {
+    "id": 1474280,
+    "name": "eni",
+    "location": {
+      "address": "Oberzellergasse 2a",
+      "postalCode": "1030",
+      "city": "Wien",
+      "latitude": 48.193838,
+      "longitude": 16.396971
+    },
+    "position": 7,
+    "open": true,
+    "distance": 2.463396388368383,
+    "prices": []
+  },
+  {
+    "id": 427017,
+    "name": "Shell Austria",
+    "location": {
+      "address": "AUSSTELLUNGSSTRASSE 4",
+      "postalCode": "1020",
+      "city": "WIEN",
+      "latitude": 48.21777,
+      "longitude": 16.39464
+    },
+    "position": 8,
+    "open": true,
+    "distance": 1.9647117803078344,
+    "prices": []
+  },
+  {
+    "id": 35687,
+    "name": "BP",
+    "location": {
+      "address": "Erdbergerlaende 30 ",
+      "postalCode": "1030",
+      "city": "Wien",
+      "latitude": 48.201209,
+      "longitude": 16.403575
+    },
+    "position": 9,
+    "open": true,
+    "distance": 2.472149537248659,
+    "prices": []
+  },
+  {
+    "id": 1135,
+    "name": "NNB BRUNNENTANKSTELLE",
+    "location": {
+      "address": "Brunnengasse 4",
+      "postalCode": "1160",
+      "city": "WIEN",
+      "latitude": 48.20462,
+      "longitude": 16.334813
+    },
+    "position": 10,
+    "open": true,
+    "distance": 2.7997800459527897,
+    "prices": []
+  }
+]

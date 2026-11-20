@@ -1,0 +1,173 @@
+[
+  {
+    "id": 3088,
+    "name": "ENI Gutmann",
+    "location": {
+      "address": "Gewerbestraße 2",
+      "postalCode": "6522",
+      "city": "Prutz",
+      "latitude": 47.09156,
+      "longitude": 10.66695
+    },
+    "position": 1,
+    "open": true,
+    "distance": 30.80707256818618,
+    "prices": [
+      {
+        "fuelType": "GAS",
+        "amount": 1.725,
+        "label": "CNG"
+      }
+    ]
+  },
+  {
+    "id": 3080,
+    "name": "ENI Gutmann",
+    "location": {
+      "address": "Sellrainer Straße 2",
+      "postalCode": "6175",
+      "city": "Kematen in Tirol",
+      "latitude": 47.26188,
+      "longitude": 11.26453
+    },
+    "position": 2,
+    "open": true,
+    "distance": 77.11925667666424,
+    "prices": [
+      {
+        "fuelType": "GAS",
+        "amount": 1.725,
+        "label": "CNG"
+      }
+    ]
+  },
+  {
+    "id": 3071,
+    "name": "ENI Gutmann",
+    "location": {
+      "address": "Fürstenweg 87",
+      "postalCode": "6020",
+      "city": "Innsbruck",
+      "latitude": 47.26245,
+      "longitude": 11.37285
+    },
+    "position": 3,
+    "open": true,
+    "distance": 85.18512071391238,
+    "prices": [
+      {
+        "fuelType": "GAS",
+        "amount": 1.725,
+        "label": "CNG"
+      }
+    ]
+  },
+  {
+    "id": 3081,
+    "name": "OMV Gutmann",
+    "location": {
+      "address": "Bundesstraße 14",
+      "postalCode": "6068",
+      "city": "Mils",
+      "latitude": 47.28104,
+      "longitude": 11.53406
+    },
+    "position": 4,
+    "open": true,
+    "distance": 97.53659381237155,
+    "prices": [
+      {
+        "fuelType": "GAS",
+        "amount": 1.725,
+        "label": "CNG"
+      }
+    ]
+  },
+  {
+    "id": 3093,
+    "name": "ENI Gutmann",
+    "location": {
+      "address": "Industriestraße 12",
+      "postalCode": "6134",
+      "city": "Vomp",
+      "latitude": 47.352788,
+      "longitude": 11.698216
+    },
+    "position": 5,
+    "open": true,
+    "distance": 111.22536102527341,
+    "prices": [
+      {
+        "fuelType": "GAS",
+        "amount": 1.725,
+        "label": "CNG"
+      }
+    ]
+  },
+  {
+    "id": 6612,
+    "name": "ENI",
+    "location": {
+      "address": "Dorf 23d",
+      "postalCode": "6210",
+      "city": "Wiesing",
+      "latitude": 47.4034807,
+      "longitude": 11.8032194
+    },
+    "position": 6,
+    "open": true,
+    "distance": 120.22792679526687,
+    "prices": [
+      {
+        "fuelType": "GAS",
+        "amount": 1.725,
+        "label": "CNG"
+      }
+    ]
+  },
+  {
+    "id": 1474087,
+    "name": "eni A 12 Inntalautobahn",
+    "location": {
+      "address": "An der Au 1",
+      "postalCode": "6493",
+      "city": "Mils bei Imst",
+      "latitude": 47.213166,
+      "longitude": 10.696501
+    },
+    "position": 7,
+    "open": true,
+    "distance": 34.053295417407924,
+    "prices": []
+  },
+  {
+    "id": 1474069,
+    "name": "eni",
+    "location": {
+      "address": "Brennerautobahn Ost Tal",
+      "postalCode": "6143",
+      "city": "Matrei am Brenner",
+      "latitude": 47.14072,
+      "longitude": 11.44653
+    },
+    "position": 8,
+    "open": true,
+    "distance": 89.56001632071862,
+    "prices": []
+  },
+  {
+    "id": 1474071,
+    "name": "eni",
+    "location": {
+      "address": "Brennerautobahn West Berg",
+      "postalCode": "6143",
+      "city": "Matrei",
+      "latitude": 47.13996,
+      "longitude": 11.44809
+    },
+    "position": 9,
+    "open": true,
+    "distance": 89.67755639768927,
+    "prices": []
+  }
+]
