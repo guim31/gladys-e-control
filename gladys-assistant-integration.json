@@ -1,177 +1,403 @@
 {
   "manifest_version": 1,
   "type": "device",
-  "name": "Demo Devices Template",
+  "name": "E-Control fuel prices",
   "description": {
-    "en": "Starter template showing sensors, a switch, a dimmable light and a smart plug.",
-    "fr": "Template de démarrage : capteurs, interrupteur, lampe variable et prise connectée."
+    "en": "The cheapest fuel stations around your home in Austria, from the official E-Control calculator.",
+    "fr": "Les stations les moins chères près de chez vous en Autriche, par le calculateur officiel E-Control.",
+    "de": "Die günstigsten Tankstellen bei dir in Österreich, aus dem amtlichen Spritpreisrechner (E-Control).",
+    "es": "Las gasolineras más baratas cerca de su casa en Austria, con la calculadora oficial de E-Control."
   },
   "version": "1.0.0",
-  "docker_image": "ghcr.io/gladysassistant/integration-template-js:1.0.0",
-  "gladys_version": ">=5.1.0",
-  "cover_image": "https://raw.githubusercontent.com/GladysAssistant/integration-template-js/master/cover.png",
-  "categories": ["lighting", "security", "environment"],
-  "transports": ["local", "cloud"],
+  "docker_image": "ghcr.io/guim31/gladys-e-control:1.0.0",
+  "gladys_version": ">=5.3.0",
+  "cover_image": "https://raw.githubusercontent.com/guim31/gladys-e-control/main/cover.png",
+  "categories": ["transport", "energy"],
+  "countries": ["AT"],
+  "transports": ["cloud"],
+  "location": true,
   "config_schema": [
     {
       "key": "intro",
       "type": "section",
-      "label": { "en": "Getting started", "fr": "Pour commencer" },
+      "label": {
+        "en": "Spritpreisrechner of E-Control",
+        "fr": "Spritpreisrechner d’E-Control",
+        "de": "Spritpreisrechner der E-Control",
+        "es": "Spritpreisrechner de E-Control"
+      },
       "description": {
-        "en": "The demo weather station reads real data from the free Open-Meteo API: pick the coordinates to observe. No account, no API key.",
-        "fr": "La station météo de démonstration lit de vraies données via l'API gratuite Open-Meteo : choisissez les coordonnées à observer. Pas de compte, pas de clé d'API."
+        "en": "The official fuel price calculator of the Austrian regulator, without account. It only gives the cheapest stations (5 at most per fuel), read every 30 minutes. Not affiliated with E-Control.",
+        "fr": "Le calculateur officiel des prix des carburants du régulateur autrichien, sans compte. Il ne donne que les stations les moins chères (5 au plus par carburant), lues toutes les 30 minutes. Sans lien avec E-Control.",
+        "de": "Der offizielle Spritpreisrechner der österreichischen Regulierungsbehörde, ohne Konto. Er nennt nur die günstigsten Tankstellen (höchstens 5 je Kraftstoff), alle 30 Minuten gelesen. Nicht mit E-Control verbunden.",
+        "es": "La calculadora oficial de precios de carburantes del regulador austriaco, sin cuenta. Solo da las gasolineras más baratas (5 como máximo por carburante), leídas cada 30 minutos. Sin relación con E-Control."
       },
       "links": [
         {
-          "url": "https://open-meteo.com/en/docs",
-          "label": { "en": "Open-Meteo documentation", "fr": "Documentation Open-Meteo" }
+          "url": "https://www.e-control.at/spritpreisrechner",
+          "label": {
+            "en": "Spritpreisrechner (E-Control)",
+            "fr": "Spritpreisrechner (E-Control)",
+            "de": "Spritpreisrechner (E-Control)",
+            "es": "Spritpreisrechner (E-Control)"
+          }
         }
       ]
     },
     {
-      "key": "latitude",
-      "type": "number",
-      "label": { "en": "Latitude", "fr": "Latitude" },
-      "description": {
-        "en": "Latitude used for the demo weather sensor.",
-        "fr": "Latitude utilisée par le capteur météo de démonstration."
+      "key": "fuels",
+      "type": "multi_select",
+      "label": {
+        "en": "Fuels to follow",
+        "fr": "Carburants à suivre",
+        "de": "Verfolgte Kraftstoffe",
+        "es": "Carburantes a seguir"
       },
-      "placeholder": { "en": "e.g. 48.8566", "fr": "ex. 48.8566" },
-      "required": true,
-      "default": 48.8566,
-      "min": -90,
-      "max": 90
-    },
-    {
-      "key": "longitude",
-      "type": "number",
-      "label": { "en": "Longitude", "fr": "Longitude" },
       "description": {
-        "en": "Longitude used for the demo weather sensor.",
-        "fr": "Longitude utilisée par le capteur météo de démonstration."
+        "en": "One request to E-Control per fuel and per refresh.",
+        "fr": "Une requête à E-Control par carburant et par mise à jour.",
+        "de": "Eine Anfrage an E-Control je Kraftstoff und Aktualisierung.",
+        "es": "Una solicitud a E-Control por carburante y actualización."
       },
-      "placeholder": { "en": "e.g. 2.3522", "fr": "ex. 2.3522" },
-      "required": true,
-      "default": 2.3522,
-      "min": -180,
-      "max": 180
-    },
-    {
-      "key": "unit",
-      "type": "select",
-      "label": { "en": "Temperature unit", "fr": "Unité de température" },
       "required": false,
-      "default": "celsius",
+      "default": ["diesel", "super"],
       "options": [
-        { "value": "celsius", "label": { "en": "Celsius", "fr": "Celsius" } },
-        { "value": "fahrenheit", "label": { "en": "Fahrenheit", "fr": "Fahrenheit" } }
+        {
+          "value": "diesel",
+          "label": {
+            "en": "Diesel",
+            "fr": "Gazole",
+            "de": "Diesel",
+            "es": "Gasóleo"
+          }
+        },
+        {
+          "value": "super",
+          "label": {
+            "en": "Super 95",
+            "fr": "Sans plomb 95",
+            "de": "Super 95",
+            "es": "Gasolina 95"
+          }
+        },
+        {
+          "value": "cng",
+          "label": {
+            "en": "CNG",
+            "fr": "GNV",
+            "de": "Erdgas (CNG)",
+            "es": "GNC"
+          }
+        }
       ]
     },
     {
-      "key": "poll_frequency",
-      "type": "number",
-      "label": { "en": "Refresh interval (s)", "fr": "Intervalle de rafraîchissement (s)" },
+      "key": "postal_code",
+      "type": "string",
+      "label": {
+        "en": "Austrian postal code (optional)",
+        "fr": "Code postal autrichien (facultatif)",
+        "de": "Österreichische Postleitzahl (optional)",
+        "es": "Código postal austriaco (opcional)"
+      },
       "description": {
-        "en": "How often sensors are polled, in seconds (one minute minimum).",
-        "fr": "Fréquence d'interrogation des capteurs, en secondes (une minute minimum)."
+        "en": "Searched around it instead of the house located in Gladys.",
+        "fr": "La recherche se fait autour de lui plutôt qu’autour de la maison placée dans Gladys.",
+        "de": "Gesucht wird rund um sie statt um das in Gladys verortete Haus.",
+        "es": "La búsqueda se hace alrededor de él en lugar de la casa ubicada en Gladys."
+      },
+      "placeholder": {
+        "en": "e.g. 6580",
+        "fr": "ex. 6580",
+        "de": "z. B. 6580",
+        "es": "p. ej. 6580"
       },
       "required": false,
-      "default": 300,
-      "min": 60,
-      "max": 3600
+      "default": ""
+    },
+    {
+      "key": "language",
+      "type": "select",
+      "label": {
+        "en": "Language of the names",
+        "fr": "Langue des noms",
+        "de": "Sprache der Namen",
+        "es": "Idioma de los nombres"
+      },
+      "description": {
+        "en": "Names of the device and its features (frozen when it is added) and texts of the trigger and the action.",
+        "fr": "Noms de l’appareil et de ses fonctionnalités (figés à son ajout), textes du déclencheur et de l’action.",
+        "de": "Namen des Geräts und seiner Funktionen (beim Hinzufügen festgelegt), Texte des Auslösers und der Aktion.",
+        "es": "Nombres del dispositivo y sus funciones (fijados al añadirlo), textos del disparador y de la acción."
+      },
+      "required": false,
+      "default": "fr",
+      "options": [
+        {
+          "value": "en",
+          "label": {
+            "en": "English",
+            "fr": "English",
+            "de": "English",
+            "es": "English"
+          }
+        },
+        {
+          "value": "fr",
+          "label": {
+            "en": "Français",
+            "fr": "Français",
+            "de": "Français",
+            "es": "Français"
+          }
+        },
+        {
+          "value": "de",
+          "label": {
+            "en": "Deutsch",
+            "fr": "Deutsch",
+            "de": "Deutsch",
+            "es": "Deutsch"
+          }
+        },
+        {
+          "value": "es",
+          "label": {
+            "en": "Español",
+            "fr": "Español",
+            "de": "Español",
+            "es": "Español"
+          }
+        }
+      ]
     }
   ],
   "actions": [
     {
-      "key": "test_weather",
-      "label": { "en": "Test the weather provider", "fr": "Tester le fournisseur météo" },
-      "timeout_seconds": 30
-    },
-    {
-      "key": "identify",
-      "label": { "en": "Identify a device", "fr": "Identifier un appareil" },
-      "fields": [
-        {
-          "key": "device",
-          "type": "select",
-          "source": "devices",
-          "label": { "en": "Device", "fr": "Appareil" },
-          "required": true
-        }
-      ]
+      "key": "test_source",
+      "label": {
+        "en": "Test the price service",
+        "fr": "Tester le service des prix",
+        "de": "Preisdienst testen",
+        "es": "Probar el servicio de precios"
+      },
+      "description": {
+        "en": "Asks E-Control now and gives the cheapest price of each fuel followed.",
+        "fr": "Interroge E-Control tout de suite et donne le prix le plus bas de chaque carburant suivi.",
+        "de": "Fragt E-Control sofort ab und nennt den niedrigsten Preis jedes verfolgten Kraftstoffs.",
+        "es": "Consulta E-Control ahora e indica el precio más bajo de cada carburante seguido."
+      },
+      "timeout_seconds": 60
     }
   ],
   "scene_triggers": [
     {
-      "key": "motion_detected",
-      "label": { "en": "Motion detected", "fr": "Mouvement détecté" },
+      "key": "price_drop",
+      "label": {
+        "en": "Cheapest fuel price drop",
+        "fr": "Baisse du prix le plus bas",
+        "de": "Günstigster Preis gesunken",
+        "es": "Bajada del precio más bajo"
+      },
       "description": {
-        "en": "A demo motion sensor saw a person or an animal move.",
-        "fr": "Un détecteur de démonstration a vu bouger une personne ou un animal."
+        "en": "The cheapest price of a fuel falls around the search point. A threshold is a plain scene on the price feature.",
+        "fr": "Le prix le plus bas d’un carburant baisse autour du point de recherche. Un seuil se fait par une scène sur la fonctionnalité de prix.",
+        "de": "Der günstigste Preis eines Kraftstoffs sinkt rund um den Suchort. Eine Schwelle geht per Szene auf der Preisfunktion.",
+        "es": "El precio más bajo de un carburante baja alrededor del punto de búsqueda. Un umbral se hace con una escena sobre la función de precio."
       },
       "fields": [
         {
-          "key": "device",
-          "type": "select",
-          "source": "devices",
-          "label": { "en": "Sensor", "fr": "Détecteur" }
-        },
-        {
-          "key": "target",
+          "key": "fuel",
           "type": "multi_select",
-          "label": { "en": "What moved", "fr": "Ce qui a bougé" },
+          "label": {
+            "en": "Fuels",
+            "fr": "Carburants",
+            "de": "Kraftstoffe",
+            "es": "Carburantes"
+          },
+          "description": {
+            "en": "Leave empty for any fuel.",
+            "fr": "Laisser vide pour tout carburant.",
+            "de": "Leer lassen für jeden Kraftstoff.",
+            "es": "Deje vacío para cualquier carburante."
+          },
           "options": [
-            { "value": "person", "label": { "en": "Person", "fr": "Personne" } },
-            { "value": "animal", "label": { "en": "Animal", "fr": "Animal" } }
+            {
+              "value": "diesel",
+              "label": {
+                "en": "Diesel",
+                "fr": "Gazole",
+                "de": "Diesel",
+                "es": "Gasóleo"
+              }
+            },
+            {
+              "value": "super",
+              "label": {
+                "en": "Super 95",
+                "fr": "Sans plomb 95",
+                "de": "Super 95",
+                "es": "Gasolina 95"
+              }
+            },
+            {
+              "value": "cng",
+              "label": {
+                "en": "CNG",
+                "fr": "GNV",
+                "de": "Erdgas (CNG)",
+                "es": "GNC"
+              }
+            }
           ]
         }
       ],
       "variables": [
         {
-          "key": "target",
+          "key": "fuel",
           "type": "string",
-          "label": { "en": "What moved", "fr": "Ce qui a bougé" }
-        }
-      ]
-    }
-  ],
-  "scene_actions": [
-    {
-      "key": "identify_device",
-      "label": { "en": "Identify a device", "fr": "Identifier un appareil" },
-      "description": {
-        "en": "Make a device signal itself (the demo light blinks).",
-        "fr": "Fait se signaler un appareil (la lampe de démonstration clignote)."
-      },
-      "timeout_seconds": 15,
-      "fields": [
+          "label": {
+            "en": "Fuel key",
+            "fr": "Clé du carburant",
+            "de": "Kraftstoffschlüssel",
+            "es": "Clave del carburante"
+          }
+        },
         {
-          "key": "device",
-          "type": "select",
-          "source": "devices",
-          "label": { "en": "Device", "fr": "Appareil" },
-          "required": true
-        }
-      ],
-      "outputs": [
+          "key": "fuel_name",
+          "type": "string",
+          "label": {
+            "en": "Fuel",
+            "fr": "Carburant",
+            "de": "Kraftstoff",
+            "es": "Carburante"
+          }
+        },
         {
-          "key": "signalled",
-          "type": "boolean",
-          "label": { "en": "Device signalled", "fr": "Appareil signalé" }
+          "key": "station",
+          "type": "string",
+          "label": {
+            "en": "Station",
+            "fr": "Station",
+            "de": "Tankstelle",
+            "es": "Gasolinera"
+          }
+        },
+        {
+          "key": "price",
+          "type": "number",
+          "label": {
+            "en": "New price (€)",
+            "fr": "Nouveau prix (€)",
+            "de": "Neuer Preis (€)",
+            "es": "Nuevo precio (€)"
+          }
+        },
+        {
+          "key": "previous_price",
+          "type": "number",
+          "label": {
+            "en": "Previous price (€)",
+            "fr": "Prix précédent (€)",
+            "de": "Vorheriger Preis (€)",
+            "es": "Precio anterior (€)"
+          }
+        },
+        {
+          "key": "drop",
+          "type": "number",
+          "label": {
+            "en": "Drop (€)",
+            "fr": "Baisse (€)",
+            "de": "Rückgang (€)",
+            "es": "Bajada (€)"
+          }
         }
       ]
     }
   ],
   "widgets": [
     {
-      "key": "demo_status",
-      "label": { "en": "Demo status", "fr": "État de la démo" },
-      "description": {
-        "en": "Live temperature and plug power, plug connection and observed location.",
-        "fr": "Température et puissance en direct, connexion de la prise, position observée."
+      "key": "cheapest_stations",
+      "label": {
+        "en": "Cheapest stations",
+        "fr": "Stations les moins chères",
+        "de": "Günstigste Tankstellen",
+        "es": "Gasolineras más baratas"
       },
-      "icon": "activity",
-      "action_timeout_seconds": 15
+      "description": {
+        "en": "The cheapest price of a fuel and the list of the cheapest stations around.",
+        "fr": "Le prix le plus bas d’un carburant et la liste des stations les moins chères autour.",
+        "de": "Der günstigste Preis eines Kraftstoffs und die Liste der günstigsten Tankstellen.",
+        "es": "El precio más bajo de un carburante y la lista de las gasolineras más baratas."
+      },
+      "icon": "droplet",
+      "settings": [
+        {
+          "key": "fuel",
+          "type": "select",
+          "label": {
+            "en": "Fuel",
+            "fr": "Carburant",
+            "de": "Kraftstoff",
+            "es": "Carburante"
+          },
+          "description": {
+            "en": "Empty: the first fuel followed.",
+            "fr": "Vide : le premier carburant suivi.",
+            "de": "Leer: der erste verfolgte Kraftstoff.",
+            "es": "Vacío: el primer carburante seguido."
+          },
+          "required": false,
+          "options": [
+            {
+              "value": "diesel",
+              "label": {
+                "en": "Diesel",
+                "fr": "Gazole",
+                "de": "Diesel",
+                "es": "Gasóleo"
+              }
+            },
+            {
+              "value": "super",
+              "label": {
+                "en": "Super 95",
+                "fr": "Sans plomb 95",
+                "de": "Super 95",
+                "es": "Gasolina 95"
+              }
+            },
+            {
+              "value": "cng",
+              "label": {
+                "en": "CNG",
+                "fr": "GNV",
+                "de": "Erdgas (CNG)",
+                "es": "GNC"
+              }
+            }
+          ]
+        },
+        {
+          "key": "show_list",
+          "type": "boolean",
+          "label": {
+            "en": "Show the list of stations",
+            "fr": "Afficher la liste des stations",
+            "de": "Liste der Tankstellen anzeigen",
+            "es": "Mostrar la lista de gasolineras"
+          },
+          "description": {
+            "en": "Up to 5 stations, with address, distance and price.",
+            "fr": "Jusqu’à 5 stations, avec adresse, distance et prix.",
+            "de": "Bis zu 5 Tankstellen mit Adresse, Entfernung und Preis.",
+            "es": "Hasta 5 gasolineras, con dirección, distancia y precio."
+          },
+          "required": false,
+          "default": true
+        }
+      ]
     }
   ]
 }

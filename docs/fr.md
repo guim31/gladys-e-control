@@ -1,67 +1,103 @@
-# Template de démonstration
+# Prix des carburants E-Control
 
-Ceci est la documentation utilisateur de l'intégration. Gladys ré-héberge ce
-fichier et affiche un lien **Documentation** permanent vers lui dans l'écran
-de configuration (dans la langue de l'utilisateur, avec l'anglais en repli) —
-c'est au moment de configurer que l'utilisateur en a le plus besoin. Gardez
-les courtes indications d'accueil dans les blocs `section` du `config_schema`
-du manifest ; mettez ici le pas-à-pas détaillé (captures d'écran, dépannage…).
+Les stations les moins chères autour de chez vous en Autriche, d’après le
+[Spritpreisrechner](https://www.e-control.at/spritpreisrechner) d’E-Control, le régulateur
+autrichien de l’énergie. Gratuit, sans compte ni clé. Sans lien avec E-Control.
 
 ## Ce que vous obtenez
 
-Six appareils de démonstration apparaissent après l'installation : une
-station météo (vraies données Open-Meteo), un interrupteur, une lampe
-variable, une prise connectée avec mesure de puissance, un détecteur de
-mouvement et une caméra.
+- Un appareil **Carburant le moins cher – Autriche** : pour chaque carburant suivi (gazole, sans
+  plomb 95, GNV), le prix le plus bas autour du point de recherche, le nom et l’adresse de la
+  station, et sa distance.
+- Un déclencheur de scène **Baisse du prix le plus bas**, avec la station et le nouveau prix.
+- Un widget de tableau de bord **Stations les moins chères** : le prix le plus bas et la liste des
+  stations les moins chères.
+- Une action pour tester le service depuis l’écran Configuration.
+
+## Prérequis
+
+- Gladys Assistant 5.3.0 ou plus récent.
+- Votre maison placée sur la carte dans Gladys (Paramètres → Maisons), ou un code postal
+  autrichien.
+- Un accès à Internet depuis Gladys : l’intégration interroge les serveurs d’E-Control.
+
+## Installation
+
+Dans Gladys, ouvrez **Intégrations → Installer depuis GitHub** et saisissez
+`https://github.com/guim31/gladys-e-control`. Ouvrez ensuite l’intégration, remplissez la
+configuration, et ajoutez l’appareil depuis l’onglet **Découverte**.
 
 ## Configuration
 
-1. Ouvrez l'onglet **Configuration** de l'intégration.
-2. Renseignez la **latitude** et la **longitude** que la station météo de
-   démonstration doit observer (Paris par défaut), et choisissez votre unité
-   de température. L'**intervalle de rafraîchissement** règle la fréquence
-   de lecture de la station météo et de la puissance de la prise : toutes
-   les 5 minutes par défaut, toutes les minutes au plus.
-3. Enregistrez : les appareils apparaissent dans l'onglet **Découverte**,
-   prêts à être ajoutés.
+- **Carburants à suivre** : gazole et sans plomb 95 par défaut ; le GNV (gaz naturel, €/kg) aussi
+  si vous le souhaitez. Une requête par carburant toutes les 30 minutes.
+- **Code postal autrichien (facultatif)** : les stations sont cherchées autour de lui plutôt
+  qu’autour de la maison placée dans Gladys (un lieu de travail, ou une maison dans un autre pays).
+- **Langue des noms** : la langue des noms de l’appareil et de ses fonctionnalités, écrits une fois
+  à l’ajout de l’appareil, et des textes du déclencheur et de l’action.
 
-Le réglage **Préférer la connexion locale** pilote la prise de
-démonstration : elle affiche en badge le canal réellement utilisé (local ou
-cloud), avec un point orange quand elle fonctionne en mode dégradé (local
-refusé, bascule cloud).
+## Appareils
 
-## Actions
+### Carburant le moins cher – Autriche
 
-- **Tester le fournisseur météo** — effectue une requête en direct vers
-  Open-Meteo et affiche la température et l'humidité actuelles sous le
-  bouton.
-- **Identifier un appareil** — choisissez un de vos appareils dans la liste
-  et il se signale (la lampe de démonstration « clignote » dans les logs).
+Pour chaque carburant suivi, quatre fonctionnalités :
+
+- le prix en euros (au litre, au kilogramme pour le GNV) ;
+- le nom de la station ;
+- son adresse ;
+- sa distance en km depuis le point de recherche.
+
+L’appareil est en lecture seule. Ses valeurs sont gardées dans l’historique, sauf les textes.
 
 ## Scènes
 
-L'intégration ajoute ses propres cartes à l'éditeur de scènes (Gladys 5.1
-ou plus récent), dans la catégorie **Intégrations** :
+### Prix sous un seuil
 
-- **Mouvement détecté** (déclencheur) — lance la scène quand un détecteur
-  de démonstration voit bouger quelque chose. Choisissez éventuellement le
-  détecteur et ce qui a bougé (personne, animal) ; laissés vides, toute
-  détection correspond. Les actions suivantes peuvent lire ce qui a bougé
-  avec `{{triggerEvent.data.target}}`.
-- **Identifier un appareil** (action) — fait se signaler l'appareil choisi.
-  Elle indique si l'appareil a pu se signaler, pour que les actions
-  suivantes puissent en dépendre.
+Pas besoin de déclencheur : créez une scène avec le déclencheur **Valeur d’un appareil** sur la
+fonctionnalité de prix, par exemple « Gazole (€/l) inférieur à 1,90 ».
+
+### Baisse du prix le plus bas
+
+Se déclenche quand le prix le plus bas d’un carburant baisse, avec les variables **carburant**,
+**nom du carburant**, **station**, **nouveau prix**, **prix précédent** et **baisse**. Filtrez sur
+un ou plusieurs carburants si vous le souhaitez. Le premier prix après l’installation ou un
+changement de point de recherche est seulement mémorisé.
 
 ## Tableau de bord
 
-Ajoutez le widget **État de la démo** à un tableau de bord : il affiche en
-direct la température de la station météo et la puissance de la prise du
-bureau, la connexion utilisée par la prise (en orange si dégradée) et la
-position observée. Son bouton **Identifier la lampe** fait se signaler la
-lampe de démonstration.
+### Widget Stations les moins chères
+
+Choisissez un carburant (le premier suivi par défaut). Le widget affiche le prix le plus bas, puis
+jusqu’à 5 stations avec leur adresse, leur distance et leur prix, et l’heure de la dernière
+lecture. Un réglage masque la liste.
+
+## Actions
+
+**Tester le service des prix** interroge E-Control tout de suite et répond avec le prix le plus bas
+de chaque carburant. Elle échoue en rouge quand aucun point de recherche n’est défini, quand le
+code postal est inconnu, quand aucune station n’est trouvée ou quand le service est injoignable.
+
+## Données et limites
+
+- La loi autrichienne oblige les stations à déclarer leurs prix ; le Spritpreisrechner ne montre
+  que les **moins chères** (5 par carburant) : une station précise ne peut pas être suivie, et
+  l’API ne connaît pas de favoris.
+- En Autriche, les prix ne peuvent monter qu’une fois par jour, à midi ; ils peuvent baisser à tout
+  moment.
+- L’intégration interroge toutes les 30 minutes (15 minutes après un échec), ce qui reste doux pour
+  un service public gratuit. Les stations fermées sont écartées.
+- La zone de recherche est celle d’E-Control : à la campagne, la station GNV la moins chère peut
+  être à 100 km.
+- Hors d’Autriche, E-Control ne trouve rien.
 
 ## Dépannage
 
-L'intégration journalise tout ce qu'elle fait : consultez les logs de
-l'intégration depuis l'interface Gladys (ou `docker logs` sur l'hôte) avec
-`LOG_LEVEL=debug` pour le détail complet.
+- **« Aucun point de recherche »** : placez votre maison dans Gladys, ou saisissez un code postal.
+- **« Pas un code autrichien »** : vérifiez les quatre chiffres (par exemple `6580`).
+- **« Injoignable »** : les serveurs d’E-Control ne répondent pas ; l’intégration réessaie toutes
+  les 15 minutes. Plus de détails avec `LOG_LEVEL=debug` dans les journaux de l’intégration.
+
+## Crédits
+
+Prix : E-Control, [Spritpreisrechner](https://www.e-control.at/spritpreisrechner). Intégration par
+guim31, licence Apache-2.0. Sans lien avec E-Control.
