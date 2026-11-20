@@ -266,7 +266,9 @@ export function registerHandlers(
 
   async function publishStates() {
     const read = current();
-    if (!read || !cheapestAdded()) {
+    // During an outage, the last prices are not sent again as fresh ones
+    // (the heartbeat would keep them alive): the status says it instead.
+    if (!read || failure || !cheapestAdded()) {
       return;
     }
     const states = cheapestStates(gladys, config, read.results);
@@ -412,7 +414,9 @@ export function registerHandlers(
     failure = null;
     await locate();
     schedule();
-    await tick({ force: true });
+    // Not forced: a reconnection to Gladys keeps the prices of less than 30
+    // minutes ago; a new point or new fuels are read at once (nextReadAt).
+    await tick();
     await publishDiscovery();
   }
 

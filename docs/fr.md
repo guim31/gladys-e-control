@@ -89,12 +89,14 @@ code postal est inconnu, quand aucune station n’est trouvée ou quand le servi
 - La zone de recherche est celle d’E-Control : à la campagne, la station GNV la moins chère peut
   être à 100 km.
 - Hors d’Autriche, E-Control ne trouve rien.
+- Pendant une panne, ou quand plus aucune station ne vend un carburant, l’appareil garde ses
+  dernières valeurs : l’écran Configuration et le widget le signalent.
 
 ## Dépannage
 
 - **« Aucun point de recherche »** : placez votre maison dans Gladys, ou saisissez un code postal.
-- **« Pas un code autrichien »** : vérifiez les quatre chiffres (par exemple `6580`).
-- **« Injoignable »** : les serveurs d’E-Control ne répondent pas ; l’intégration réessaie toutes
+- **« Ce code postal n’est pas un code autrichien connu d’E-Control »** : vérifiez les quatre chiffres (par exemple `6580`).
+- **« Le service des prix des carburants d’E-Control est injoignable »** : les serveurs d’E-Control ne répondent pas ; l’intégration réessaie toutes
   les 15 minutes. Plus de détails avec `LOG_LEVEL=debug` dans les journaux de l’intégration.
 
 ## Crédits

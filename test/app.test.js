@@ -317,3 +317,27 @@ test('nothing is published or remembered before the device is added', async (t) 
   assert.equal(world.fake.states.length, 0);
   assert.deepEqual(world.app.prices, {});
 });
+
+test('a reconnection to Gladys reuses fresh prices; an outage publishes nothing stale', async (t) => {
+  const world = await createWorld();
+  t.after(() => world.app.stop());
+  await createAll(world);
+  await world.fake.configUpdated({ language: 'fr', fuels: ['diesel', 'super', 'cng'] });
+  assert.equal(world.api.count(), 3);
+  const published = world.fake.states.length;
+  world.api.fail = () => new Response('{}', { status: 503 });
+  world.clock.advance(13 * HOUR);
+  await world.app.tick();
+  assert.equal(world.fake.states.length, published);
+});
+
+test('a station without an address: a dash, never the previous station’s address', async (t) => {
+  const api = createFakeApi();
+  const world = await createWorld({ api });
+  t.after(() => world.app.stop());
+  await createAll(world);
+  api.answers.vienna.DIE[0].location = {};
+  world.clock.advance(REFRESH_MS);
+  await world.app.tick();
+  assert.equal(world.fake.lastState(cheapestIds(world.gladys).feature('diesel_address')), '–');
+});

@@ -187,7 +187,7 @@
         "de": "Fragt E-Control sofort ab und nennt den niedrigsten Preis jedes verfolgten Kraftstoffs.",
         "es": "Consulta E-Control ahora e indica el precio más bajo de cada carburante seguido."
       },
-      "timeout_seconds": 60
+      "timeout_seconds": 90
     }
   ],
   "scene_triggers": [

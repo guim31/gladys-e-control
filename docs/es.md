@@ -88,12 +88,14 @@ desconocido, cuando no se encuentra ninguna gasolinera o cuando el servicio no r
 - La zona de búsqueda es la de E-Control: en el campo, la gasolinera de GNC más barata puede estar
   a 100 km.
 - Fuera de Austria, E-Control no encuentra nada.
+- Durante una avería, o cuando ninguna gasolinera vende ya un carburante, el dispositivo conserva
+  sus últimos valores: la pantalla Configuración y el widget lo indican.
 
 ## Solución de problemas
 
 - **«Ningún punto de búsqueda»**: ubique su casa en Gladys o introduzca un código postal.
-- **«No es un código austriaco»**: compruebe las cuatro cifras (por ejemplo `6580`).
-- **«No disponible»**: los servidores de E-Control no responden; la integración lo intenta de nuevo
+- **«Este código postal no es un código austriaco conocido por E-Control»**: compruebe las cuatro cifras (por ejemplo `6580`).
+- **«El servicio de precios de E-Control no está disponible»**: los servidores de E-Control no responden; la integración lo intenta de nuevo
   cada 15 minutos. Más detalles con `LOG_LEVEL=debug` en los registros de la integración.
 
 ## Créditos

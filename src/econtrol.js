@@ -19,7 +19,7 @@ import { FUELS } from './fuels.js';
 
 export const BASE_URL = 'https://api.e-control.at/sprit/1.0';
 export const UNITS_URL = `${BASE_URL}/regions/units`;
-export const TIMEOUT_MS = 20 * 1000;
+export const TIMEOUT_MS = 15 * 1000;
 
 /** A failure of the source, with a short English message for the logs. */
 export class SourceError extends Error {}
@@ -74,7 +74,7 @@ export function parseStations(list, fuel) {
       (Array.isArray(item?.prices) ? item.prices : []).find((p) => p?.fuelType === code)?.amount,
     );
     // A price of 0 or a typo would become the cheapest: plausible ones only.
-    if (price === null || price <= 0.2 || price >= 10 || item.open === false) {
+    if (price === null || price <= 0.2 || price >= 5 || item.open === false) {
       continue;
     }
     const location = item.location ?? {};

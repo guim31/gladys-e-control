@@ -90,12 +90,14 @@ ist, keine Tankstelle gefunden wird oder der Dienst nicht erreichbar ist.
 - Das Suchgebiet ist das der E-Control: auf dem Land kann die günstigste CNG-Tankstelle 100 km
   entfernt sein.
 - Außerhalb Österreichs findet E-Control nichts.
+- Bei einem Ausfall, oder wenn keine Tankstelle einen Kraftstoff mehr anbietet, behält das Gerät
+  seine letzten Werte: der Konfigurationsbildschirm und das Widget zeigen es an.
 
 ## Fehlerbehebung
 
 - **„Kein Suchort“**: verorte dein Haus in Gladys oder gib eine Postleitzahl ein.
-- **„Keine österreichische Postleitzahl“**: prüfe die vier Ziffern (zum Beispiel `6580`).
-- **„Nicht erreichbar“**: die Server der E-Control antworten nicht; die Integration versucht es
+- **„Diese Postleitzahl ist keine österreichische, die E-Control kennt“**: prüfe die vier Ziffern (zum Beispiel `6580`).
+- **„Der Spritpreisrechner von E-Control ist gerade nicht erreichbar“**: die Server der E-Control antworten nicht; die Integration versucht es
   alle 15 Minuten erneut. Mehr Details mit `LOG_LEVEL=debug` in den Protokollen der Integration.
 
 ## Danksagung

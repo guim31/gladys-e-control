@@ -99,13 +99,11 @@ export function cheapestStates(gladys, config, results) {
       { device_feature_external_id: ids.feature(`${fuel}_price`), state: best.price },
       { device_feature_external_id: ids.feature(`${fuel}_station`), text: best.name.slice(0, 200) },
     );
-    const address = stationAddress(best);
-    if (address) {
-      states.push({
-        device_feature_external_id: ids.feature(`${fuel}_address`),
-        text: address.slice(0, 200),
-      });
-    }
+    // Never the address of the previous station: a dash when E-Control has none.
+    states.push({
+      device_feature_external_id: ids.feature(`${fuel}_address`),
+      text: (stationAddress(best) || '–').slice(0, 200),
+    });
     if (best.distanceKm !== null) {
       states.push({
         device_feature_external_id: ids.feature(`${fuel}_distance`),

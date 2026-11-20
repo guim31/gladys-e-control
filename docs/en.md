@@ -85,12 +85,14 @@ found or when the service cannot be reached.
 - The search area is the one of E-Control: in the countryside, the cheapest CNG station may be
   100 km away.
 - Outside Austria, E-Control finds nothing.
+- During an outage, or when no station sells a fuel any more, the device keeps its last values:
+  the Configuration screen and the widget say so.
 
 ## Troubleshooting
 
 - **"No search point"**: locate your house in Gladys, or enter a postal code.
-- **"Not an Austrian postal code"**: check the four digits (for example `6580`).
-- **"Cannot be reached"**: the E-Control servers do not answer; the integration tries again every
+- **"This postal code is not an Austrian one known to E-Control"**: check the four digits (for example `6580`).
+- **"The E-Control fuel price service cannot be reached"**: the E-Control servers do not answer; the integration tries again every
   15 minutes. More details with `LOG_LEVEL=debug` in the logs of the integration.
 
 ## Credits
