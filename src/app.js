@@ -415,7 +415,9 @@ export function registerHandlers(
     await locate();
     schedule();
     // Not forced: a reconnection to Gladys keeps the prices of less than 30
-    // minutes ago; a new point or new fuels are read at once (nextReadAt).
+    // minutes ago; a new point or new fuels are read at once (nextReadAt),
+    // after the read in progress, which belongs to the previous configuration.
+    await ticking?.catch(() => {});
     await tick();
     await publishDiscovery();
   }
