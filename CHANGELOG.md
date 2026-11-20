@@ -10,6 +10,8 @@ the notes of the version's GitHub Release.
 
 ## [Unreleased]
 
+## [1.0.0] - 2026-11-20
+
 ### Added
 
 - A **Cheapest fuel – Austria** device: per fuel followed (diesel, Super 95, CNG), the lowest price
@@ -18,3 +20,6 @@ the notes of the version's GitHub Release.
 - A **Fuel price drop** scene trigger, a **Cheapest stations** dashboard widget and a **Test the
   price service** action.
 - Texts and documentation in English, French, German and Spanish.
+
+[Unreleased]: https://github.com/guim31/gladys-e-control/compare/v1.0.0...HEAD
+[1.0.0]: https://github.com/guim31/gladys-e-control/releases/tag/v1.0.0
